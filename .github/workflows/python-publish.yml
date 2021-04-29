@@ -4,6 +4,10 @@ on:
   workflow_dispatch:
   release:
     types: [created]
+  push:
+    # Sequence of patterns matched against refs/tags
+    tags:
+      - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
 
 jobs:
   deploy:
@@ -24,3 +28,8 @@ jobs:
     - name: Build and publish
       run: |
         python setup.py sdist bdist_wheel
+    - uses: softprops/action-gh-release@78c309ef59fdb9557cd6574f2e0be552936ed728
+      with:
+        files: dist/*.tar.gz
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
