@@ -30,6 +30,6 @@ jobs:
         python setup.py sdist bdist_wheel
     - uses: softprops/action-gh-release@78c309ef59fdb9557cd6574f2e0be552936ed728
       with:
-        files: dist/*.tar.gz
+        files: dist/*
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
